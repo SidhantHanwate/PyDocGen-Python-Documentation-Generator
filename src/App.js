@@ -1,39 +1,50 @@
-import React, { useState } from "react";
-import "./App.css";
+import React, { useState } from 'react';
+import './App.css';
+
 
 function App() {
-	const [link, setLink] = useState("");
+  const [inputValue, setInputValue] = useState('');
+  const handleSubmit = () => {
+    console.log(`Input value: ${inputValue}`);
+  };
 
-	const handleSubmit = (event) => {
-		event.preventDefault();
-		console.log(link);
-	};
-
-	const handleChange = (event) => {
-		setLink(event.target.value);
-	};
-
-	return (
-		<div className="app-container">
-			<div className="form-container">
-				<form onSubmit={handleSubmit}>
-					<label htmlFor="link-input">Enter Repo Link:</label>
-					<div className="input-container">
-						<input
-							type="text"
-							id="link-input"
-							value={link}
-							onChange={handleChange}
-							placeholder="https://example.com"
-						/>
-						<button type="submit" className="fetch-button">
-							Fetch
-						</button>
-					</div>
-				</form>
-			</div>
+  return (
+    <div className="container">
+      <div className="input-container">
+        <input
+          type="text"
+          placeholder="Type something..."
+          value={inputValue}
+          onChange={(e) => setInputValue(e.target.value)}
+        />
+        <button onClick={handleSubmit}>Submit</button>
+      </div>
+      <div className="sections">
+        <div className="section1">Section 1
 		</div>
-	);
+        <div className="section2">
+		<input
+          type="text"
+          placeholder="Enter the code here"
+          value={inputValue}
+          onChange={(e) => setInputValue(e.target.value)}
+        />
+		</div>
+        <div className="section3">
+		<input
+          type="text"
+          placeholder="Documented code"
+          value={inputValue}
+          onChange={(e) => setInputValue(e.target.value)}
+        />
+		</div>
+		<div className="section4">Section 4
+		</div>
+			
+		</div>
+      </div>
+    
+  );
 }
 
 export default App;
