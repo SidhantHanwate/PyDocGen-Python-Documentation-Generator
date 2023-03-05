@@ -3,48 +3,64 @@ import './App.css';
 
 
 function App() {
-  const [inputValue, setInputValue] = useState('');
-  const handleSubmit = () => {
-    console.log(`Input value: ${inputValue}`);
-  };
+  
+  const [textLeft, setTextLeft] = useState('');
+  const [textRightTop, setTextRightTop] = useState('');
+  const [textRightBottom, setTextRightBottom] = useState('');
+  const [searchTerm, setSearchTerm] = useState('');
+
+  function handleTextLeftChange(event) {
+    setTextLeft(event.target.value);
+  }
+
+  function handleTextRightTopChange(event) {
+    setTextRightTop(event.target.value);
+  }
+
+  function handleTextRightBottomChange(event) {
+    setTextRightBottom(event.target.value);
+  }
+
+  function handleSearchTermChange(event) {
+    setSearchTerm(event.target.value);
+  }
+
+  function handleButtonClick() {
+    // Handle button click here
+  }
 
   return (
     <div className="container">
       <div className="input-container">
-        <input
-          type="text"
-          placeholder="Type something..."
-          value={inputValue}
-          onChange={(e) => setInputValue(e.target.value)}
-        />
-        <button onClick={handleSubmit}>Submit</button>
+      <input type="text" value={searchTerm} placeholder="Enter the URL here" onChange={handleSearchTermChange} />
+        <button onClick={handleButtonClick}>Fetch</button>
       </div>
       <div className="sections">
-        <div className="section1">Section 1
-		</div>
-        <div className="section2">
-		<input
-          type="text"
-          placeholder="Enter the code here"
-          value={inputValue}
-          onChange={(e) => setInputValue(e.target.value)}
+        <div className="section1" >
+        <textarea value={textLeft}  onChange={handleTextLeftChange} 
+          
         />
-		</div>
-        <div className="section3">
-		<input
-          type="text"
-          placeholder="Documented code"
-          value={inputValue}
-          onChange={(e) => setInputValue(e.target.value)}
-        />
-		</div>
-		<div className="section4">Section 4
-		</div>
+	    	</div>
+        <div className="section2" >
+        <textarea value={textRightTop} placeholder="Enter the code here" onChange={handleTextRightTopChange} />
+        </div>
+        <div className="section3" >
+        <textarea value={textRightBottom} placeholder="Documented Code" onChange={handleTextRightBottomChange} />
+        </div>
+        <div className="section4" >
+        {/* Placeholder div to keep the layout consistent */}
+        </div>
+		    
+		    </div>
+        
 			
 		</div>
-      </div>
-    
+     
   );
+  
 }
 
 export default App;
+
+
+

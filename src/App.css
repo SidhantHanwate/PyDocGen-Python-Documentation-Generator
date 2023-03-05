@@ -11,31 +11,32 @@
 	align-items: center;
 	justify-content: space-between;
 	width: 100%;
-	height: 50px;
+	height: 80px;
 	background-color: #333030;
-	padding: 10px;
+	padding: 15px;
 	box-sizing: border-box;
   }
   
   .input-container input {
-	width: 84%;
+	width: 88%;
 	height: 100%;
 	border: none;
 	outline: none;
-	font-size: 16px;
-	border-radius: 10px;
+	font-size: 20px;
+	padding-left: 20px;
+	border-radius: 5px;
   }
   
   .input-container button {
-	width: 15%;
-	height: 100%;
+	width: 10%;
+	height: 90%;
 	border: none;
 	outline: none;
 	background-color: #650bed;
 	color: white;
-	font-size: 16px;
+	font-size: 20px;
 	cursor: pointer;
-	border-radius: 10px;
+	border-radius: 5px;
   }
   
   .input-container button:hover {
@@ -47,65 +48,73 @@
 	flex-direction: row;
 	height: calc(100% - 50px); /* the height is the remaining space after the input container */
   }
+	.section1 {
+		width: 15%;
+		height: 100%;
+		background-color:#333030;
+		box-sizing: border-box;
+		padding: 10px;
+		border-radius: 15px;
+	  } 
   
-  .section1 {
-	width: 10%; 
-	height: 100%;
-	background-color: #CCCCFF;
-	box-sizing: border-box;
-	padding: 20px;
-	border-radius: 15px;
-  }
-
-  .section2 {
-	width: 40%; 
-	height: 100%;
-	background:#ECC19c;
-	box-sizing: border-box;
-	padding: 20px;
-	border-radius: 15px;
-  }
-  .section2 input
+  .section1 textarea
   {
 	align-content: center;
+	width: 100%;
+	height: 5%;
+	border: none;
+	outline: none;
+	font-size: 16px;
+	border-radius: 2.5px;
+  }
+  .section2 {
+	width: 43%; 
+	height: 100%;
+	background:#333030;
+	box-sizing: border-box;
+	padding: 10px;
+	border-radius: 15px;
+  }
+  .section2 textarea
+  {
 	width: 100%;
 	height: 100%;
 	border: none;
 	outline: none;
-	font-size: 16px;
-	border-radius: 15px;
+	font-size: 20px;
+	border-radius: 5px;
   }
   .section3 {
-	width: 40%; 
-	background-color:#1e847f;
+	width: 43%;
+	height: 100%; 
+	background-color:#333030;
 	box-sizing: border-box;
-	padding: 20px;
+	padding: 10px;
 	
 	border-radius: 15px;
   }
-  .section3 input
+  .section3 textarea
   {
-	align-content: center;
 	width: 100%;
 	height: 100%;
 	border: none;
 	outline: none;
-	font-size: 16px;
-	border-radius: 15px;
+	font-size: 20px;
+	border-radius: 5px;
   }
   
   .section4 {
-	width: 10%;
+	width: 15%;
 	height: 100%;
-	background-color:#CCCCFF;
+	background-color:#333030;
 	box-sizing: border-box;
 	padding: 20px;
 	border-radius: 15px;
-  }
+  } 
 
-  /* ... */
+  
 
-.section4 card {
+/* .section4 card {
 	background-color: white;
 	border: 1px solid #ddd;
 	border-radius: 5px;
@@ -121,4 +130,4 @@
   .section4 card p {
 	margin-bottom: 0px;
   }
-   
+    */ 
