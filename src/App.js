@@ -7,7 +7,9 @@ function App() {
 	const [textRightBottom, setTextRightBottom] = useState("");
 	const [searchTerm, setSearchTerm] = useState("");
 	const [currentPage, setCurrentPage] = useState("home");
-
+  
+  
+ 
 	function handleTextLeftChange(event) {
 		setTextLeft(event.target.value);
 	}
@@ -26,6 +28,10 @@ function App() {
 
 	function handleButtonClick() {
 		// Handle button click here
+	}
+  function handleSubmit() {
+		// Handle button click here
+    
 	}
 
 	function handlePageChange(page) {
@@ -63,7 +69,7 @@ function App() {
 						/>
 					</div>
 					<div className="section4">
-						{/* Placeholder div to keep the layout consistent */}
+          <button onClick={handleSubmit}>Submit</button>
 					</div>
 				</>
 			);
@@ -94,6 +100,6 @@ function App() {
 			<div className="sections">{currentPageContent}</div>
 		</div>
 	);
-}
 
+  }
 export default App;
