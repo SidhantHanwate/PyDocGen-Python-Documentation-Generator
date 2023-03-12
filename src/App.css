@@ -48,6 +48,7 @@
 .sections {
 	display: flex;
 	flex-direction: row;
+	padding: 15px;
 	height: calc(
 		100% - 80px
 	); /* the height is the remaining space after the input container */
@@ -59,7 +60,7 @@
 	background-color: #fbfbfb;
 	box-sizing: border-box;
 	padding: 20px;
-	border-radius: 15px;
+	border-radius: 5px;
 }
 
 .section1 textarea {
@@ -68,7 +69,7 @@
 	border: none;
 	outline: none;
 	font-size: 16px;
-	border-radius: 2.5px;
+	border-radius: 0.5px;
 	/* color: #ffffff; */
 	background-color: #ffffff;
 }
@@ -120,7 +121,7 @@
 	box-sizing: border-box;
 	padding: 20px;
 	/* flex: end; */
-	border-radius: 15px;
+	border-radius: 5px;
 }
 
 .section4 button {
@@ -132,7 +133,7 @@
 	outline: none;
 	border-radius: 5px;
 	position: absolute;
-	bottom: 10px;
+	bottom: 20px;
 	right: 10;
 	color: #ffffff;
 	font-size: 20px;
@@ -151,7 +152,7 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	background-color: #24292e;
+	background-color: #333030;
 	color: #fff;
 	height: 60px;
 	padding: 0 20px;
@@ -165,12 +166,16 @@
 .nav-links {
 	display: flex;
 	flex-direction: row;
+	background-color: #4d05b9;
 }
 
 .nav-link {
 	margin-left: 20px;
 	font-size: 16px;
+	background-color: #4d05b9;
 }
+
+
 
 @media screen and (max-width: 768px) {
 	.navbar {
@@ -182,11 +187,13 @@
 	.nav-links {
 		flex-direction: column;
 		margin-top: 20px;
+		background-color: #4d05b9;
 	}
 
 	.nav-link {
 		margin: 10px 0;
 		font-size: 20px;
+		
 	}
 }
 
