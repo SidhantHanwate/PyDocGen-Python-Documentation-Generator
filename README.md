@@ -51,12 +51,12 @@ pip install axios
 npm start
 ```
 
-### Django: https://docs.djangoproject.com/en/4.1/topics/install/
-### https://www.geeksforgeeks.org/django-introduction-and-installation/ 
+#### Django: https://docs.djangoproject.com/en/4.1/topics/install/
+#### https://www.geeksforgeeks.org/django-introduction-and-installation/ 
 
 
-### Different python modules used includes ast, networkx, openai. We can install this modules using the pip install commands. 
+Different python modules used includes ast, networkx, openai. We can install this modules using the pip install commands. 
 
-### Different django-react modules used include axios, corsheaders. 
-### "npm install axios" can be used for the installation of the axios.
+Different django-react modules used include axios, corsheaders.  
+"npm install axios" can be used for the installation of the axios.
 
