@@ -1,5 +1,7 @@
 import React, { useState } from "react";
+import { useRef } from "react";
 import "./App.css";
+import axios from "axios";
 
 function App() {
 	const [textLeft, setTextLeft] = useState("");
@@ -7,16 +9,39 @@ function App() {
 	const [textRightBottom, setTextRightBottom] = useState("");
 	const [searchTerm, setSearchTerm] = useState("");
 	const [currentPage, setCurrentPage] = useState("home");
-  
-  
- 
+	const ref = useRef(null);
+
+	const handleSubmit = async (event) => {
+	  console.log(textRightTop);
+	  event.preventDefault();
+	  const response = await axios.post('http://127.0.0.1:8000/api/processInput', {
+		input: textRightTop
+	  });
+	  setTextRightBottom(response.data.output);
+	}
+	// const handleSubmit = (event) => {
+	// 	axios
+	// 		.post(
+	// 			`http://127.0.0.1:8000/api/processInput`
+	// 		)
+	// 		.then((textRightTop) => {
+	// 			console.log(`Posted ${textRightTop}`);
+	// 		})
+	// 		.catch((err) => {
+	// 			console.log(`Error : ${err}`);
+	// 		});
+	// };
+
 	function handleTextLeftChange(event) {
 		setTextLeft(event.target.value);
 	}
 
 	function handleTextRightTopChange(event) {
+		// console.log(event.target.value);
 		setTextRightTop(event.target.value);
-	}
+		// console.log(textRightTop);
+	  }
+	  
 
 	function handleTextRightBottomChange(event) {
 		setTextRightBottom(event.target.value);
@@ -28,10 +53,6 @@ function App() {
 
 	function handleButtonClick() {
 		// Handle button click here
-	}
-  function handleSubmit() {
-		// Handle button click here
-    
 	}
 
 	function handlePageChange(page) {
@@ -57,6 +78,7 @@ function App() {
 					<div className="section2">
 						<textarea
 							value={textRightTop}
+							ref={ref}
 							placeholder="Enter the code here"
 							onChange={handleTextRightTopChange}
 						/>
@@ -69,7 +91,7 @@ function App() {
 						/>
 					</div>
 					<div className="section4">
-          <button onClick={handleSubmit}>Submit</button>
+						<button onClick={handleSubmit}>Submit</button>
 					</div>
 				</>
 			);
@@ -100,6 +122,5 @@ function App() {
 			<div className="sections">{currentPageContent}</div>
 		</div>
 	);
-
-  }
+}
 export default App;
