@@ -59,4 +59,3 @@ Different python modules used includes ast, networkx, openai. We can install thi
 
 Different django-react modules used include axios, corsheaders. 
 "npm install axios" can be used for the installation of the axios.
-
