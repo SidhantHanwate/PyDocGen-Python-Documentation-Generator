@@ -7,10 +7,10 @@ The project makes the complete documentation for the python code which includes 
 ## Installation: 
 ### Django
 To install Django, follow the steps below:
-''' bash
+``` bash
 pip install Django
 end
-'''
+```
 
 
 
