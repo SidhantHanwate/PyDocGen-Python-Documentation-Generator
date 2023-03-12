@@ -5,7 +5,7 @@ The project makes the complete documentation for the python code which includes 
 git clone github.com:SidhantHanwate/Documentation_Generator.git
 ```
 
-### Tech Stack used: Django, React, Python(including a variety of python modules)
+### Tech Stack used: Django, React, Python(including a various other python modules)
 
 ## Installation and Running Backend: 
 ### Django
