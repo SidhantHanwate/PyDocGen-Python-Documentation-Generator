@@ -14,7 +14,7 @@ To install Django and run Backend, follow the steps below:
 ``` bash
 cd django_bk
 ```
-2. Create a pythoin virtual environment using
+2. Create a python virtual environment using
     python
 ``` bash
 pip install django
