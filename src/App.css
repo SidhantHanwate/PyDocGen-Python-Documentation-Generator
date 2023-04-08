@@ -127,7 +127,6 @@
 }
 
 .section4 button {
-	
 	width: 10%;
 	height: 6%;
 	background-color: #4d05b9;
@@ -140,9 +139,6 @@
 	color: #ffffff;
 	font-size: 20px;
 	cursor: pointer;
-	
-	
-   
 }
 
 .section4 button:hover {
@@ -163,40 +159,6 @@
 .logo {
 	font-size: 24px;
 	font-weight: bold;
-}
-
-.nav-links {
-	display: flex;
-	flex-direction: row;
-	background-color: #4d05b9;
-}
-
-.nav-link {
-	margin-left: 20px;
-	font-size: 16px;
-	background-color: #4d05b9;
-}
-
-
-
-@media screen and (max-width: 768px) {
-	.navbar {
-		flex-direction: column;
-		height: auto;
-		padding: 20px;
-	}
-
-	.nav-links {
-		flex-direction: column;
-		margin-top: 20px;
-		background-color: #4d05b9;
-	}
-
-	.nav-link {
-		margin: 10px 0;
-		font-size: 20px;
-		
-	}
 }
 
 /*
