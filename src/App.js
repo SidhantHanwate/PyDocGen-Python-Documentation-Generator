@@ -3,40 +3,19 @@ import { useRef } from "react";
 import "./App.css";
 import axios from "axios";
 import Navbar from "./components/Navbar";
+import CodeSummarizer from "./pages/CodeSummarizer";
+import CodingStyleGuide from "./pages/CodingStyleGuide";
+import DependencyVisualizer from "./pages/DependencyVisualizer";
+import Home from "./pages/Home";
+import ReleaseNotes from "./pages/ReleaseNotes";
+import RequirementsFileGenerator from "./pages/RequirementsFileGenerator";
+import TroubleshootingGuide from "./pages/TroubleshootingGuide";
+
+import { Route, Routes } from "react-router-dom";
+import Search from "./components/Search";
 
 function App() {
-	const [textLeft, setTextLeft] = useState("");
-	const [textRightTop, setTextRightTop] = useState("");
-	const [textRightBottom, setTextRightBottom] = useState("");
 	const [searchTerm, setSearchTerm] = useState("");
-	const [currentPage, setCurrentPage] = useState("home");
-	const ref = useRef(null);
-
-	const handleSubmit = async (event) => {
-		console.log(textRightTop);
-		event.preventDefault();
-		const response = await axios.post(
-			"http://127.0.0.1:8000/api/processInput",
-			{
-				input: textRightTop,
-			}
-		);
-		setTextRightBottom(response.data.output);
-	};
-
-	function handleTextLeftChange(event) {
-		setTextLeft(event.target.value);
-	}
-
-	function handleTextRightTopChange(event) {
-		// console.log(event.target.value);
-		setTextRightTop(event.target.value);
-		// console.log(textRightTop);
-	}
-
-	function handleTextRightBottomChange(event) {
-		setTextRightBottom(event.target.value);
-	}
 
 	function handleSearchTermChange(event) {
 		setSearchTerm(event.target.value);
@@ -45,35 +24,6 @@ function App() {
 	function handleButtonClick() {
 		// Handle button click here
 	}
-
-	function handlePageChange(page) {
-		setCurrentPage(page);
-	}
-
-	let currentPageContent = null;
-	currentPageContent = (
-		<>
-			<div className="section1">{/* Display files and folders here */}</div>
-			<div className="section2">
-				<textarea
-					value={textRightTop}
-					ref={ref}
-					placeholder="Enter the code here"
-					onChange={handleTextRightTopChange}
-				/>
-			</div>
-			<div className="section3">
-				<textarea
-					value={textRightBottom}
-					placeholder="Documented Code"
-					onChange={handleTextRightBottomChange}
-				/>
-			</div>
-			<div className="section4">
-				<button onClick={handleSubmit}>Submit</button>
-			</div>
-		</>
-	);
 
 	return (
 		<div className="container">
@@ -87,7 +37,18 @@ function App() {
 				/>
 				<button onClick={handleButtonClick}>Fetch</button>
 			</div>
-			<div className="sections">{currentPageContent}</div>
+			<Routes>
+				<Route index path="/" element={<Home />} />
+				<Route path="/codesummarizer" element={<CodeSummarizer />} />
+				<Route path="/codingstyleguide" element={<CodingStyleGuide />} />
+				<Route path="dependencyvisualizer" element={<DependencyVisualizer />} />
+				<Route path="releasenotes" element={<ReleaseNotes />} />
+				<Route
+					path="requirementsfilegenerator"
+					element={<RequirementsFileGenerator />}
+				/>
+				<Route path="troubleshootingguide" element={<TroubleshootingGuide />} />
+			</Routes>
 		</div>
 	);
 }

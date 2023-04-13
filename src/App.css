@@ -93,7 +93,7 @@
 	font-size: 20px;
 	border-radius: 5px;
 	color: #ffffff;
-	background-color: #333030;
+	background-color: #f0ecec;
 }
 
 .section3 {
@@ -113,7 +113,7 @@
 	font-size: 20px;
 	border-radius: 5px;
 	color: #ffffff;
-	background-color: #333030;
+	background-color: #d2c3c3;
 }
 
 .section4 {
@@ -161,21 +161,11 @@
 	font-weight: bold;
 }
 
-/*
-.section4 card {
-  background-color: white;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  box-shadow: 0px 0px 5px #ddd;
-  padding: 10px;
-  margin-bottom: 10px;
+.CodeSum{
+	/* flex-direction: column; */
+	display: flex;
+	flex-direction: row;
+	height: 100vh;
+	width: 100vw;
+		background-color: #333030; 
 }
-
-.section4 card h2 {
-  margin-top: 0px;
-}
-
-.section4 card p {
-  margin-bottom: 0px;
-}
-*/
