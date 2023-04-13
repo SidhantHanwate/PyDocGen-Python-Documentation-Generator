@@ -1,5 +1,5 @@
 import React from "react";
 
 export default function TroubleshootingGuide() {
-	return <div>troubleshootingGuide</div>;
+	return <div style={{ color: "white" }}>troubleshootingGuide</div>;
 }

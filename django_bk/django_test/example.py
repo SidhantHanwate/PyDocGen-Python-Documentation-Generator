@@ -1,26 +1,23 @@
-# Program to check if a number is prime or not
+# Python program to find the factorial of a number provided by the user
+# using recursion
 
-num = 29
+def factorial(x):
+    """This is a recursive function
+    to find the factorial of an integer"""
 
-# To take input from the user
-#num = int(input("Enter a number: "))
-
-# define a flag variable
-flag = False
-
-if num == 1:
-    print(num, "is not a prime number")
-elif num > 1:
-    # check for factors
-    for i in range(2, num):
-        if (num % i) == 0:
-            # if factor is found, set flag to True
-            flag = True
-            # break out of loop
-            break
-
-    # check if flag is True
-    if flag:
-        print(num, "is not a prime number")
+    if x == 1:
+        return 1
     else:
-        print(num, "is a prime number")
+        # recursive call to the function
+        return (x * factorial(x-1))
+
+
+# change the value for a different result
+num = 7
+
+# to take input from the user
+# num = int(input("Enter a number: "))
+
+# call the factorial function
+result = factorial(num)
+print("The factorial of", num, "is", result)
