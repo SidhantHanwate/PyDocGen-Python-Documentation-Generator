@@ -23,6 +23,7 @@ function App() {
 
 	function handleButtonClick() {
 		// Handle button click here
+		console.log("hi button click")
 	}
 
 	return (
