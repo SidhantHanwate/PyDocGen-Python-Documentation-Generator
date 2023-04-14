@@ -14,16 +14,29 @@ import TroubleshootingGuide from "./pages/TroubleshootingGuide";
 import { Route, Routes } from "react-router-dom";
 import Search from "./components/Search";
 
+
 function App() {
 	const [searchTerm, setSearchTerm] = useState("");
+	const [filearray, setFilearray] = useState([])
 
 	function handleSearchTermChange(event) {
 		setSearchTerm(event.target.value);
 	}
 
-	function handleButtonClick() {
-		// Handle button click here
-	}
+	const handleButtonClick = async (event) => {
+		// console.log(textRightTop);
+		event.preventDefault();
+		const response = await axios.post(
+			"http://127.0.0.1:8000/api/fetchdata",
+			{
+				input: searchTerm,
+			}
+		);
+		// setTextRightBottom(response.data.output);
+		setFilearray(response.data.output.toString().split(","))
+  		console.log("inside fn", filearray);
+	};
+	// console.log("outside fucntion", filearray);
 
 	return (
 		<div className="container">
@@ -39,7 +52,7 @@ function App() {
 			</div>
 			<Routes>
 				<Route index path="/" element={<Home />} />
-				<Route path="/codesummarizer" element={<CodeSummarizer />} />
+				<Route path="/codesummarizer" element={<CodeSummarizer filearray={filearray} />} />
 				<Route path="/codingstyleguide" element={<CodingStyleGuide />} />
 				<Route path="dependencyvisualizer" element={<DependencyVisualizer />} />
 				<Route path="releasenotes" element={<ReleaseNotes />} />

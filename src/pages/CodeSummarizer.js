@@ -2,10 +2,13 @@ import React, { useState } from "react";
 import { useRef } from "react";
 import "../App.css";
 import axios from "axios";
+import Sidebar from "../components/Sidebar";
 export default function codeSummarizer(props) {
 	const [textRightTop, setTextRightTop] = useState("");
 	const [textRightBottom, setTextRightBottom] = useState("");
 	const ref = useRef(null);
+	const filearray = props.filearray;
+
 
 	const handleSubmit = async (event) => {
 		console.log(textRightTop);
@@ -41,7 +44,9 @@ export default function codeSummarizer(props) {
 	let currentPageContent = null;
 	currentPageContent = (
 		<>
-			<div className="section1">{/* Display files and folders here */}</div>
+			<div className="section1">
+			<Sidebar buttonNames={filearray} />
+			</div>
 			<div className="section2">
 				<textarea
 					value={textRightTop}
@@ -64,26 +69,6 @@ export default function codeSummarizer(props) {
 	);
 
 	return (
-		<div className="CodeSum">
-			<div className="section1">{/* Display files and folders here */}</div>
-			<div className="section2">
-				<textarea
-					value={textRightTop}
-					ref={ref}
-					placeholder="Enter the code here"
-					onChange={handleTextRightTopChange}
-				/>
-			</div>
-			<div className="section3">
-				<textarea
-					value={textRightBottom}
-					placeholder="Documented Code"
-					onChange={handleTextRightBottomChange}
-				/>
-			</div>
-			<div className="section4">
-				<button onClick={handleSubmit}>Submit</button>
-			</div>
-		</div>
+		<div className="CodeSum">{currentPageContent}</div>
 	);
 }

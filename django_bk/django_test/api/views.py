@@ -13,7 +13,52 @@ def processInput(request):
     else:
         return JsonResponse({'error': 'No input provided'})
 
+def fetchdata(request):
+    body=json.loads(request.body)
+    print(body)
+    input_text=body["input"]
+    print(f"Received input: {input_text}")  # Debugging print statement
+    if input_text is not None:
+        output_text = fetchdata1(input_text)
+        return JsonResponse({'output': output_text})
+    else:
+        return JsonResponse({'error': 'No input provided'})
 
+DEV_MODE=True
+
+import requests
+
+# Define function to get list of files in a Github repo
+def fetchdata1(repo_link):
+    file_names = []
+    get_files_in_repo(repo_link, file_names)
+    return file_names
+
+
+def getcontent(request):
+    body=json.loads(request.body)
+    input_text = body["input"]
+
+    print(f"Received input: {input_text}")  # Debugging print statement
+    if input_text is not None:
+        output_text = get_files_in_repo(input_text)
+        print(output_text)
+        return JsonResponse({'output': output_text})
+    else:
+        return JsonResponse({'error': 'No input provided'})
+    
+def getrequire(request):
+    body=json.loads(request.body)
+    input_text = body["input"]
+
+    print(f"Received input: {input_text}")  # Debugging print statement
+    if input_text is not None:
+        getrequirements(input_text)
+        output_text=str
+        print(output_text+"//")
+        return JsonResponse({'output': output_text})
+    else:
+        return JsonResponse({'error': 'No input provided'})
 
 import openai
 def genDostring(str):
@@ -61,7 +106,7 @@ def genDostring(str):
     if current_function:
         functions[current_function] = "\n".join(current_function_lines)
     
-    openai.api_key = "<API KEY>"
+    openai.api_key = "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"
     for function_name, function_contents in functions.items():
         code = function_contents
         print("sth... ",code,'\n')
@@ -71,3 +116,63 @@ def genDostring(str):
         )["choices"][0]["message"]["content"].strip()
 
         return completion
+    
+
+
+
+import requests
+import json
+import sys
+
+def get_files_in_repo(repo_link, file_names):
+    api_link = repo_link.replace("github.com", "api.github.com/repos") + "/contents/"
+    response = requests.get(api_link)
+
+    if response.status_code == 404:
+        print("Invalid Github repo link")
+        return
+
+    files = json.loads(response.text)
+
+    for file in files:
+        if file["type"] == "file":
+            # Construct the Github URL for the file
+            file_url = repo_link + "/blob/main/" + file["path"]
+            print( file_url)
+            file_names.append(file_url)
+        elif file["type"] == "dir":
+            get_files_in_dir(repo_link, file["path"], file_names)
+
+    # Check if there are more pages of files
+    while "next" in response.links:
+        response = requests.get(response.links["next"]["url"])
+        files = json.loads(response.text)
+
+        for file in files:
+            if file["type"] == "file":
+                # Construct the Github URL for the file
+                file_url = repo_link + "/blob/main/" + file["path"]
+                print(file_url)
+                file_names.append(file_url)
+            elif file["type"] == "dir":
+                get_files_in_dir(repo_link, file["path"], file_names)
+
+def get_files_in_dir(repo_link, dir_path, file_names):
+    api_link = repo_link.replace("github.com", "api.github.com/repos") + "/contents/" + dir_path
+    response = requests.get(api_link)
+
+    if response.status_code == 404:
+        print("Invalid Github repo link")
+        return
+
+    files = json.loads(response.text)
+
+    for file in files:
+        if file["type"] == "file":
+            # Construct the Github URL for the file
+            file_url = repo_link + "/blob/main/" + dir_path + "/" + file["name"]
+            print(file_url)
+            file_names.append(file_url)
+        elif file["type"] == "dir":
+            get_files_in_dir(repo_link, dir_path + "/" + file["name"], file_names)
+
