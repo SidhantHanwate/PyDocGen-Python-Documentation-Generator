@@ -1,23 +1,26 @@
-# Python program to find the factorial of a number provided by the user
-# using recursion
+# Function for nth Fibonacci number
+def Fibonacci(n):
 
-def factorial(x):
-    """This is a recursive function
-    to find the factorial of an integer"""
+	# Check if input is 0 then it will
+	# print incorrect input
+	if n < 0:
+		print("Incorrect input")
 
-    if x == 1:
-        return 1
-    else:
-        # recursive call to the function
-        return (x * factorial(x-1))
+	# Check if n is 0
+	# then it will return 0
+	elif n == 0:
+		return 0
 
+	# Check if n is 1,2
+	# it will return 1
+	elif n == 1 or n == 2:
+		return 1
 
-# change the value for a different result
-num = 7
+	else:
+		return Fibonacci(n-1) + Fibonacci(n-2)
 
-# to take input from the user
-# num = int(input("Enter a number: "))
+# Driver Program
+print(Fibonacci(9))
 
-# call the factorial function
-result = factorial(num)
-print("The factorial of", num, "is", result)
+# This code is contributed by Saket Modi
+# then corrected and improved by Himanshu Kanojiya

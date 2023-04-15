@@ -8,9 +8,9 @@ export default function RequirementsFileGenerator() {
 	function handleSearchTermChange(event) {
 		setSearchTerm(event.target.value);
 	}
-	
+
 	return (
-		<div className="container">
+		<div className="container1">
 			<div className="input-container">
 				<input
 					type="text"

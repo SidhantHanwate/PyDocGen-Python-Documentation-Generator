@@ -9,7 +9,7 @@ export default function DependencyVisualizer() {
 	}
 
 	return (
-		<div className="container">
+		<div className="container2">
 			<div className="input-container">
 				<input
 					type="text"
