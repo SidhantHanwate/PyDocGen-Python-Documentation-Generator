@@ -34,14 +34,14 @@ function App() {
 		);
 		// setTextRightBottom(response.data.output);
 		setFilearray(response.data.output.toString().split(","))
-  		console.log("inside fn", filearray);
+		console.log("inside fn", filearray);
 	};
 	// console.log("outside fucntion", filearray);
 
 	return (
 		<div className="container">
 			<Navbar title="Documentation Generator" />
-			<div className="input-container">
+			{/* <div className="input-container">
 				<input
 					type="text"
 					value={searchTerm}
@@ -49,7 +49,7 @@ function App() {
 					onChange={handleSearchTermChange}
 				/>
 				<button onClick={handleButtonClick}>Fetch</button>
-			</div>
+			</div> */}
 			<Routes>
 				<Route index path="/" element={<Home />} />
 				<Route path="/codesummarizer" element={<CodeSummarizer filearray={filearray} />} />

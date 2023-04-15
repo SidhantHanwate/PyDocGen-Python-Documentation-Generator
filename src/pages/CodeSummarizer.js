@@ -9,6 +9,11 @@ export default function codeSummarizer(props) {
 	const ref = useRef(null);
 	const filearray = props.filearray;
 
+		const [searchTerm, setSearchTerm] = useState("");
+	
+	function handleSearchTermChange(event) {
+		setSearchTerm(event.target.value);
+	}
 
 	const handleSubmit = async (event) => {
 		console.log(textRightTop);
@@ -44,8 +49,17 @@ export default function codeSummarizer(props) {
 	let currentPageContent = null;
 	currentPageContent = (
 		<>
+			<div className="input-container">
+				<input
+					type="text"
+					value={searchTerm}
+					placeholder="Enter the URL here"
+					onChange={handleSearchTermChange}
+				/>
+				<button>Fetch</button>
+			</div>
 			<div className="section1">
-			<Sidebar buttonNames={filearray} />
+				<Sidebar buttonNames={filearray} />
 			</div>
 			<div className="section2">
 				<textarea
@@ -68,7 +82,5 @@ export default function codeSummarizer(props) {
 		</>
 	);
 
-	return (
-		<div className="CodeSum">{currentPageContent}</div>
-	);
+	return <div className="CodeSum">{currentPageContent}</div>;
 }

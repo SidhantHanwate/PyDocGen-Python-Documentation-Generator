@@ -1,5 +1,25 @@
-import React from "react";
+import React,{useState} from "react";
+import "../App.css";
+
 
 export default function RequirementsFileGenerator() {
-	return <div style={{ color: "white" }}>requirementsFileGenerator</div>;
+	const [searchTerm, setSearchTerm] = useState("");
+	
+	function handleSearchTermChange(event) {
+		setSearchTerm(event.target.value);
+	}
+	
+	return (
+		<div className="container">
+			<div className="input-container">
+				<input
+					type="text"
+					value={searchTerm}
+					placeholder="Enter the URL here"
+					onChange={handleSearchTermChange}
+				/>
+				<button>Fetch</button>
+			</div>
+		</div>
+	);
 }
