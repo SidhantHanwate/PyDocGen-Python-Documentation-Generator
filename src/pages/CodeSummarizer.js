@@ -8,7 +8,12 @@ export default function codeSummarizer(props) {
 	const [textRightBottom, setTextRightBottom] = useState("");
 	const ref = useRef(null);
 	const filearray = props.filearray;
-	
+
+	const [searchTerm, setSearchTerm] = useState("");
+
+	function handleSearchTermChange(event) {
+		setSearchTerm(event.target.value);
+	}
 
 	const handleSubmit = async (event) => {
 		console.log(textRightTop);
@@ -32,34 +37,52 @@ export default function codeSummarizer(props) {
 		setTextRightBottom(event.target.value);
 	}
 
-	let currentPageContent = null;
-	currentPageContent = (
-		<>
-			<div className="section1">
-			<Sidebar buttonNames={filearray} setTextRightTop={setTextRightTop} />
-			</div>
-			<div className="section2">
-				<textarea
-					value={textRightTop}
-					ref={ref}
-					placeholder="Enter the code here"
-					onChange={handleTextRightTopChange}
-				/>
-			</div>
-			<div className="section3">
-				<textarea
-					value={textRightBottom}
-					placeholder="Documented Code"
-					onChange={handleTextRightBottomChange}
-				/>
-			</div>
-			<div className="section4">
-				<button onClick={handleSubmit}>Submit</button>
-			</div>
-		</>
-	);
-
 	return (
-		<div className="CodeSum">{currentPageContent}</div>
+		<div className="">
+			<div className="row">
+				<div className="container-fluid">
+					<div className="input-container mt--5">
+						<input
+							type="text"
+							value={searchTerm}
+							placeholder="Enter the URL here"
+							onChange={handleSearchTermChange}
+						/>
+						<button>Fetch</button>
+					</div>
+				</div>
+				<div className="d-flex p-1">
+					<div className="section1cs">
+						<Sidebar buttonNames={filearray} setTextRightTop={setTextRightTop} />
+					</div>
+					<div className="section2">
+						<textarea
+							value={textRightTop}
+							ref={ref}
+							placeholder="Enter the code here"
+							onChange={handleTextRightTopChange}
+						/>
+					</div>
+					<div className="section3">
+						<textarea
+							value={textRightBottom}
+							placeholder="Documented Code"
+							onChange={handleTextRightBottomChange}
+						/>
+					</div>
+					<div className="section4">
+					<button
+						type="button"
+						className="btn"
+						onClick={handleSubmit}
+						style={{ backgroundColor: "#4d05b9", color: "white", width: "151px", fontSize: "20px", fontWeight: "bold" ,  position: "absolute", bottom: 0, alignContent: "center" }}
+						>
+						Submit
+					</button>
+
+					</div>
+				</div>
+			</div>
+		</div>
 	);
 }
