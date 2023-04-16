@@ -23,24 +23,9 @@ function App() {
 		setSearchTerm(event.target.value);
 	}
 
-	const handleButtonClick = async (event) => {
-		// console.log(textRightTop);
-		event.preventDefault();
-		const response = await axios.post(
-			"http://127.0.0.1:8000/api/fetchdata",
-			{
-				input: searchTerm,
-			}
-		);
-		// setTextRightBottom(response.data.output);
-		setFilearray(response.data.output.toString().split(","))
-		console.log("inside fn", filearray);
-	};
-	// console.log("outside fucntion", filearray);
-
 	return (
 		<div className="container">
-			<Navbar title="Documentation Generator" />
+			<Navbar title="PyDocGen" />
 			{/* <div className="input-container">
 				<input
 					type="text"

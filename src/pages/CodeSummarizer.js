@@ -7,13 +7,28 @@ export default function codeSummarizer(props) {
 	const [textRightTop, setTextRightTop] = useState("");
 	const [textRightBottom, setTextRightBottom] = useState("");
 	const ref = useRef(null);
-	const filearray = props.filearray;
+	// const filearray = props.filearray;
 
 	const [searchTerm, setSearchTerm] = useState("");
+	const [filearray, setFilearray] = useState([])
 
 	function handleSearchTermChange(event) {
 		setSearchTerm(event.target.value);
 	}
+
+		const handleButtonClick = async (event) => {
+		// console.log(textRightTop);
+		event.preventDefault();
+		const response = await axios.post(
+			"http://127.0.0.1:8000/api/fetchdata",
+			{
+				input: searchTerm,
+			}
+		);
+		// setTextRightBottom(response.data.output);
+		setFilearray(response.data.output.toString().split(","))
+  		console.log("inside fn", filearray);
+	};
 
 	const handleSubmit = async (event) => {
 		console.log(textRightTop);
@@ -48,7 +63,7 @@ export default function codeSummarizer(props) {
 							placeholder="Enter the URL here"
 							onChange={handleSearchTermChange}
 						/>
-						<button>Fetch</button>
+						<button onClick={handleButtonClick}>Fetch</button>
 					</div>
 				</div>
 				<div className="d-flex p-1">
