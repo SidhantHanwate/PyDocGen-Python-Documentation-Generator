@@ -8,7 +8,7 @@ export default function codeSummarizer(props) {
 	const [textRightBottom, setTextRightBottom] = useState("");
 	const ref = useRef(null);
 	const filearray = props.filearray;
-
+	
 
 	const handleSubmit = async (event) => {
 		console.log(textRightTop);
@@ -31,21 +31,12 @@ export default function codeSummarizer(props) {
 	function handleTextRightBottomChange(event) {
 		setTextRightBottom(event.target.value);
 	}
-	function handleTextRightTopChange(event) {
-		// console.log(event.target.value);
-		setTextRightTop(event.target.value);
-		// console.log(textRightTop);
-	}
-
-	function handleTextRightBottomChange(event) {
-		setTextRightBottom(event.target.value);
-	}
 
 	let currentPageContent = null;
 	currentPageContent = (
 		<>
 			<div className="section1">
-			<Sidebar buttonNames={filearray} />
+			<Sidebar buttonNames={filearray} setTextRightTop={setTextRightTop} />
 			</div>
 			<div className="section2">
 				<textarea

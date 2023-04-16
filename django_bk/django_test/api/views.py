@@ -2,6 +2,21 @@
 import json
 from django.http import JsonResponse
 
+def loadcontent(request):
+    body=json.loads(request.body)
+    repo_link=body["input"]
+    print(f"Received input:.................................................................................................................... {repo_link}")  # Debugging print statement
+    if repo_link is not None:
+        output_text = open_github_file(repo_link)
+        return JsonResponse({'output': output_text})
+    
+def open_github_file(link):
+    api_link = link.replace("github.com", "raw.githubusercontent.com")
+    api_link = api_link.replace("/blob", "/")
+    response = requests.get(api_link)
+    file_content = response.text
+    return file_content
+
 def processInput(request):
     body=json.loads(request.body)
     input_text = body["input"]
@@ -106,7 +121,7 @@ def genDostring(str):
     if current_function:
         functions[current_function] = "\n".join(current_function_lines)
     
-    openai.api_key = "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"
+    openai.api_key = "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"
     for function_name, function_contents in functions.items():
         code = function_contents
         print("sth... ",code,'\n')
@@ -136,10 +151,11 @@ def get_files_in_repo(repo_link, file_names):
 
     for file in files:
         if file["type"] == "file":
-            # Construct the Github URL for the file
-            file_url = repo_link + "/blob/main/" + file["path"]
-            print( file_url)
-            file_names.append(file_url)
+            if file["name"].endswith(".py"):
+                # Construct the Github URL for the file
+                file_url = repo_link + "/blob/main/" + file["path"]
+                print( file_url)
+                file_names.append(file_url)
         elif file["type"] == "dir":
             get_files_in_dir(repo_link, file["path"], file_names)
 
@@ -150,10 +166,11 @@ def get_files_in_repo(repo_link, file_names):
 
         for file in files:
             if file["type"] == "file":
-                # Construct the Github URL for the file
-                file_url = repo_link + "/blob/main/" + file["path"]
-                print(file_url)
-                file_names.append(file_url)
+                if file["name"].endswith(".py"):
+                    # Construct the Github URL for the file
+                    file_url = repo_link + "/blob/main/" + file["path"]
+                    print(file_url)
+                    file_names.append(file_url)
             elif file["type"] == "dir":
                 get_files_in_dir(repo_link, file["path"], file_names)
 
@@ -169,10 +186,11 @@ def get_files_in_dir(repo_link, dir_path, file_names):
 
     for file in files:
         if file["type"] == "file":
-            # Construct the Github URL for the file
-            file_url = repo_link + "/blob/main/" + dir_path + "/" + file["name"]
-            print(file_url)
-            file_names.append(file_url)
+            if file["name"].endswith(".py"):
+                # Construct the Github URL for the file
+                file_url = repo_link + "/blob/main/" + dir_path + "/" + file["name"]
+                print(file_url)
+                file_names.append(file_url)
         elif file["type"] == "dir":
             get_files_in_dir(repo_link, dir_path + "/" + file["name"], file_names)
 

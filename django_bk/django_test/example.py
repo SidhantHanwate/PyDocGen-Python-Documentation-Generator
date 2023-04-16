@@ -1,23 +1,27 @@
-# Python program to find the factorial of a number provided by the user
-# using recursion
+# Import necessary libraries
+from sklearn import datasets
+from sklearn.model_selection import train_test_split
+from sklearn.neighbors import KNeighborsClassifier
 
-def factorial(x):
-    """This is a recursive function
-    to find the factorial of an integer"""
+# Define a function to train and test a KNN classifier on the iris dataset
+def knn_classifier():
+    # Load iris dataset
+    iris = datasets.load_iris()
 
-    if x == 1:
-        return 1
-    else:
-        # recursive call to the function
-        return (x * factorial(x-1))
+    # Split data into training and testing sets
+    X_train, X_test, y_train, y_test = train_test_split(iris.data, iris.target, test_size=0.3)
 
+    # Create KNN classifier with k=3
+    knn = KNeighborsClassifier(n_neighbors=3)
 
-# change the value for a different result
-num = 7
+    # Fit the classifier to the training data
+    knn.fit(X_train, y_train)
 
-# to take input from the user
-# num = int(input("Enter a number: "))
+    # Predict the target values for the testing data
+    y_pred = knn.predict(X_test)
 
-# call the factorial function
-result = factorial(num)
-print("The factorial of", num, "is", result)
+    # Print the accuracy score of the classifier
+    print("Accuracy:", knn.score(X_test, y_test))
+
+# Call the function
+knn_classifier()
