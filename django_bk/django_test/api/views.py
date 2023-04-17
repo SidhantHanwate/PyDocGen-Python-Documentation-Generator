@@ -50,32 +50,21 @@ def clone_repo(github_repo_link):
     subprocess.check_call(['git', 'clone', f'{github_repo_link}', repo_dir])
     return os.path.abspath(repo_dir)
 
-dependencies=set()
-def getrequirements(path):
-    for filename in os.listdir(path):
-        if filename.endswith(".py"):
-            filepath=os.path.join(path,filename)
-            command = ['pip', 'list',path, os.path.join(path, filename)]
-            result = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-            if result.returncode != 0:
-                print(f"Error running command {command}:")
-                print(result.stderr.decode())
-            else:
-                dependencies.update(result.stdout.decode().splitlines())
+import os
+import subprocess
 
-        elif os.path.isdir(os.path.join(path,filename)):
-            getrequirements(os.path.join(path,filename)) 
-    
-    # Write the dependencies to a requirements.txt file
-    list=[] 
-    with open(os.path.join(path, 'requirements.txt'), 'w') as f:
-        for dependency in sorted(dependencies):
-            list.append(dependency)
-            f.write(dependency + '\n')
-    
-    print(list)
+def getrequirements(folder_path):
+    # Run the pipreqs command and capture its output as a string
+    requirements_file = os.path.join(folder_path, "requirements.txt")
+    command = f"pipreqs {folder_path} --force --savepath {requirements_file}"
+    output = subprocess.check_output(command, shell=True, stderr=subprocess.STDOUT)
 
-    return list 
+    # Read the requirements.txt file and return its contents as a string
+    with open(requirements_file, "r") as f:
+        requirements = f.read()
+
+    return requirements
+
 
 DEV_MODE=True
 
