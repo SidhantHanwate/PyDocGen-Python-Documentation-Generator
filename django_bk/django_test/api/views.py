@@ -5,7 +5,7 @@ from django.http import JsonResponse
 def loadcontent(request):
     body=json.loads(request.body)
     repo_link=body["input"]
-    print(f"Received input:.................................................................................................................... {repo_link}")  # Debugging print statement
+   #  print(f"Received input:.................................................................................................................... {repo_link}")  # Debugging print statement
     if repo_link is not None:
         output_text = open_github_file(repo_link)
         return JsonResponse({'output': output_text})
@@ -39,6 +39,44 @@ def fetchdata(request):
     else:
         return JsonResponse({'error': 'No input provided'})
 
+import os
+import subprocess
+
+def clone_repo(github_repo_link):
+    # print()
+    repo_dir = os.path.basename(github_repo_link)
+    if os.path.exists(repo_dir):
+        return os.path.abspath(repo_dir)
+    subprocess.check_call(['git', 'clone', f'{github_repo_link}', repo_dir])
+    return os.path.abspath(repo_dir)
+
+dependencies=set()
+def getrequirements(path):
+    for filename in os.listdir(path):
+        if filename.endswith(".py"):
+            filepath=os.path.join(path,filename)
+            command = ['pip', 'list',path, os.path.join(path, filename)]
+            result = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            if result.returncode != 0:
+                print(f"Error running command {command}:")
+                print(result.stderr.decode())
+            else:
+                dependencies.update(result.stdout.decode().splitlines())
+
+        elif os.path.isdir(os.path.join(path,filename)):
+            getrequirements(os.path.join(path,filename)) 
+    
+    # Write the dependencies to a requirements.txt file
+    list=[] 
+    with open(os.path.join(path, 'requirements.txt'), 'w') as f:
+        for dependency in sorted(dependencies):
+            list.append(dependency)
+            f.write(dependency + '\n')
+    
+    print(list)
+
+    return list 
+
 DEV_MODE=True
 
 import requests
@@ -68,9 +106,11 @@ def getrequire(request):
 
     print(f"Received input: {input_text}")  # Debugging print statement
     if input_text is not None:
-        getrequirements(input_text)
-        output_text=str
-        print(output_text+"//")
+        print("repo link: ", input_text)
+        filepath=clone_repo(input_text)
+        print(filepath)
+        output_text=getrequirements(filepath)
+        print(output_text)
         return JsonResponse({'output': output_text})
     else:
         return JsonResponse({'error': 'No input provided'})
