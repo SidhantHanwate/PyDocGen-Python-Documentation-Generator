@@ -121,16 +121,18 @@ def genDostring(str):
     if current_function:
         functions[current_function] = "\n".join(current_function_lines)
     
-    openai.api_key = "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"
+    openai.api_key = "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"
+    descriptions=[]
     for function_name, function_contents in functions.items():
         code = function_contents
-        print("sth... ",code,'\n')
-        completion = openai.ChatCompletion.create(
+        print("func : ", code)
+        # print("sth... ",code,'\n')
+        descriptions.append( openai.ChatCompletion.create(
         model="gpt-3.5-turbo", 
         messages=[{"role": "user", "content": code+"\n# A high quality docstring for the above function. Fields should be docstring, paramters and return value by function. Shouldn't be detailed\n"}]
-        )["choices"][0]["message"]["content"].strip()
+        )["choices"][0]["message"]["content"].strip())
 
-        return completion
+    return descriptions
     
 
 
