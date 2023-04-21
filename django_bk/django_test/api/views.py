@@ -150,7 +150,7 @@ def genDostring(str):
     if current_function:
         functions[current_function] = "\n".join(current_function_lines)
     
-    openai.api_key = "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"
+    openai.api_key = "API_KEY"
     descriptions=[]
     for function_name, function_contents in functions.items():
         code = function_contents
