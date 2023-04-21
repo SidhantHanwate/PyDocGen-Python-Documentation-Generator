@@ -59,6 +59,7 @@ def getrequirements(folder_path):
     command = f"pipreqs {folder_path} --force --savepath {requirements_file}"
     output = subprocess.check_output(command, shell=True, stderr=subprocess.STDOUT)
 
+
     # Read the requirements.txt file and return its contents as a string
     with open(requirements_file, "r") as f:
         requirements = f.read()
@@ -150,7 +151,7 @@ def genDostring(str):
     if current_function:
         functions[current_function] = "\n".join(current_function_lines)
     
-    openai.api_key = "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"
+    openai.api_key = "<Open_AI_API_KEY>"
     descriptions=[]
     for function_name, function_contents in functions.items():
         code = function_contents
@@ -158,7 +159,7 @@ def genDostring(str):
         # print("sth... ",code,'\n')
         descriptions.append( openai.ChatCompletion.create(
         model="gpt-3.5-turbo", 
-        messages=[{"role": "user", "content": code+"\n# A high quality docstring for the above function. Fields should be docstring, paramters and return value by function. Shouldn't be detailed\n"}]
+        messages=[{"role": "user", "content": code+"\n# A high quality docstring for the above function. Generate in markdown, with second heading for function name and write the name, fourth subheadings for input paramters, and function description. Keep appropriate spacing and colors\n"}]
         )["choices"][0]["message"]["content"].strip())
 
     return descriptions
