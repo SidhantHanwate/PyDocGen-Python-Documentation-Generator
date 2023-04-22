@@ -235,7 +235,7 @@ from github import Github
 
 def fetchversion(request):
     # Create a Github object, providing your personal access token
-    g = Github("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")
+    g = Github("<Access Token>")
 
     # Get the repository name and owner from the user
     # repo_owner = input("Enter the repository owner: ")
