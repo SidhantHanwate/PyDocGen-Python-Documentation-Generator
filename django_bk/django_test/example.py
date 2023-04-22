@@ -2,13 +2,11 @@
 import json
 from django.http import JsonResponse
 
-def processInput(request):
+def loadcontent(request):
     body=json.loads(request.body)
-    input_text = body["input"]
-
-    print(f"Received input: {input_text}")  # Debugging print statement
-    if input_text is not None:
-        output_text = genDostring(input_text)
+    repo_link=body["input"]
+   #  print(f"Received input:.................................................................................................................... {repo_link}")  # Debugging print statement
+    if repo_link is not None:
+        output_text = open_github_file(repo_link)
         return JsonResponse({'output': output_text})
-    else:
-        return JsonResponse({'error': 'No input provided'})
+   

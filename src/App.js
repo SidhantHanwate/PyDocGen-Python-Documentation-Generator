@@ -7,12 +7,13 @@ import CodeSummarizer from "./pages/CodeSummarizer";
 import CodingStyleGuide from "./pages/CodingStyleGuide";
 import DependencyVisualizer from "./pages/DependencyVisualizer";
 import Home from "./pages/Home";
-import ReleaseNotes from "./pages/ReleaseNotes";
+import ReleaseNotes from "./pages/VersionControl";
 import RequirementsFileGenerator from "./pages/RequirementsFileGenerator";
 import TroubleshootingGuide from "./pages/TroubleshootingGuide";
 
 import { Route, Routes } from "react-router-dom";
 import Search from "./components/Search";
+import VersionControl from "./pages/VersionControl";
 
 
 function App() {
@@ -40,7 +41,7 @@ function App() {
 				<Route path="/codesummarizer" element={<CodeSummarizer filearray={filearray} />} />
 				<Route path="/codingstyleguide" element={<CodingStyleGuide />} />
 				<Route path="dependencyvisualizer" element={<DependencyVisualizer />} />
-				<Route path="releasenotes" element={<ReleaseNotes />} />
+				<Route path="versioncontrol" element={<VersionControl />} />
 				<Route
 					path="requirementsfilegenerator"
 					element={<RequirementsFileGenerator />}

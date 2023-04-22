@@ -53,8 +53,8 @@ export default function Navbar(props) {
 								</a>
 							</li>
 							<li className="nav-item">
-								<a className="nav-link" href="/releaseNotes">
-									Release Notes
+								<a className="nav-link" href="/versioncontrol">
+									Version Control
 								</a>
 							</li>
 							<li className="nav-item">

@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.urls import path
 # from .views import processInput
-from .views import processInput, getcontent, getrequire, fetchdata, loadcontent
+from .views import processInput, getcontent, getrequire, fetchdata, loadcontent,fetchversion
 
 
 urlpatterns = [
@@ -23,6 +23,7 @@ urlpatterns = [
     path('getcontent',getcontent,name='getcontent'),
     path('getrequire',getrequire,name='getrequire'),
     path('fetchdata',fetchdata,name='fetchdata'),
+    path('fetchversion',fetchversion,name='fetchversion'),
     path('loadcontent',loadcontent,name='loadcontent')
 ]
 
