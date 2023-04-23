@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useRef } from "react";
 import "../App.css";
 import axios from "axios";
+import ReactMarkdown from 'react-markdown';
+
 import Sidebar from "../components/Sidebar";
 export default function codeSummarizer(props) {
 	const [textRightTop, setTextRightTop] = useState("");
@@ -39,7 +41,7 @@ export default function codeSummarizer(props) {
 				input: textRightTop,
 			}
 		);
-		setTextRightBottom(response.data.output);
+		setTextRightBottom(response.data.output.toString());
 	};
 
 	function handleTextRightTopChange(event) {
@@ -79,11 +81,13 @@ export default function codeSummarizer(props) {
 						/>
 					</div>
 					<div className="section3">
-						<textarea
+					<ReactMarkdown className="markdown">{textRightBottom}</ReactMarkdown>
+
+						{/* <textarea
 							value={textRightBottom}
 							placeholder="Documented Code"
 							onChange={handleTextRightBottomChange}
-						/>
+						/> */}
 					</div>
 					<div className="section4">
 					<button

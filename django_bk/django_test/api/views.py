@@ -175,6 +175,7 @@ def getrequirements(folder_path):
     command = f"pipreqs {folder_path} --force --savepath {requirements_file}"
     output = subprocess.check_output(command, shell=True, stderr=subprocess.STDOUT)
 
+
     # Read the requirements.txt file and return its contents as a string
     with open(requirements_file, "r") as f:
         requirements = f.read()
@@ -185,6 +186,7 @@ def getrequirements(folder_path):
 DEV_MODE=True
 
 import requests
+import github
 
 # Define function to get list of files in a Github repo
 def fetchdata1(repo_link):
@@ -266,7 +268,7 @@ def genDostring(str):
     if current_function:
         functions[current_function] = "\n".join(current_function_lines)
     
-    openai.api_key = "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"
+    openai.api_key = "<Open_AI_API_KEY>"
     descriptions=[]
     for function_name, function_contents in functions.items():
         code = function_contents
@@ -274,7 +276,7 @@ def genDostring(str):
         # print("sth... ",code,'\n')
         descriptions.append( openai.ChatCompletion.create(
         model="gpt-3.5-turbo", 
-        messages=[{"role": "user", "content": code+"\n# A high quality docstring for the above function. Fields should be docstring, paramters and return value by function. Shouldn't be detailed\n"}]
+        messages=[{"role": "user", "content": code+"\n# A high quality docstring for the above function. Generate in markdown, with second heading for function name and write the name, fourth subheadings for input paramters, and function description. Keep appropriate spacing and colors\n"}]
         )["choices"][0]["message"]["content"].strip())
 
     return descriptions
@@ -341,3 +343,65 @@ def get_files_in_dir(repo_link, dir_path, file_names):
         elif file["type"] == "dir":
             get_files_in_dir(repo_link, dir_path + "/" + file["name"], file_names)
 
+
+
+
+import os
+from github import Github
+
+def fetchversion(request):
+    # Create a Github object, providing your personal access token
+    g = Github("<Access Token>")
+
+    # Get the repository name and owner from the user
+    # repo_owner = input("Enter the repository owner: ")
+    # repo_name = input("Enter the repository name: ")
+
+    # Get the repository object
+
+    body=json.loads(request.body)
+    print(body)
+    input_text=body["input"]
+    print(input_text)
+    
+    x=input_text.split('/')
+    n=len(x)
+    repo_owner=x[n-2]
+    repo_name=x[n-1]
+    repo = g.get_repo(f"{repo_owner}/{repo_name}")
+
+    # Print the name of the default branch
+    print(f"Default branch: {repo.default_branch}")
+
+    # Print the latest commit information for the default branch
+    commit_list = repo.get_commits()
+    s=""
+    print(commit_list)
+    # for commit in commit_list:
+    #     print(commit.sha)
+        # print("SHA:", commit.sha)
+        # print("URL:", commit.url)
+        # print("Message:", commit.commit.message)
+        # if(commit.author is not None):
+        #     print("Author:", commit.author.login)
+        # if(commit.committer is not None):
+        #     print("Committer:", commit.committer.login)
+        # print("Parents:", [parent.sha for parent in commit.parents])
+        # print("Stats:", commit.stats)
+        # print("Files:", commit.files)
+        # print('$')
+    output_string = ""
+    for commit in commit_list:
+        output_string += "SHA: " + commit.sha + "\n"
+        output_string += "URL: " + commit.url + "\n"
+        output_string += "Message: " + commit.commit.message + "\n"
+        if(commit.author is not None):
+            output_string += "Author: " + commit.author.login + "\n"
+        if(commit.committer is not None):
+            output_string += "Committer: " + commit.committer.login + "\n"
+        output_string += "Parents: " + str([parent.sha for parent in commit.parents]) + "\n"
+        output_string += "Stats: " + str(commit.stats) + "\n"
+        output_string += "Files: " + str(commit.files) + "\n"
+        output_string += "$\n"
+    
+    return JsonResponse({'output': output_string})

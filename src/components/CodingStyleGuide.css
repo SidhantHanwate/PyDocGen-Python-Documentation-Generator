@@ -6,8 +6,7 @@
 	min-height: 100vh;
 	background-color: #333030;
 	color: #000000;
-}	
-
+}
 
 .input-container {
 	display: flex;
@@ -18,9 +17,6 @@
 	background-color: #333030;
 	padding: 15px;
 	box-sizing: border-box;
-	border: 1px solid #ccc;
-
-
 }
 
 .input-container input {
@@ -33,7 +29,6 @@
 	border-radius: 5px;
 	background-color: #ffffff;
 	color: #333030;
-	
 }
 
 .input-container button {
@@ -41,17 +36,16 @@
 	height: 90%;
 	border: none;
 	outline: none;
-	background-color:  #0096FF;
+	background-color: #4d05b9;
 	color: #ffffff;
 	font-size: 20px;
-	font-weight: bold;
 	cursor: pointer;
 	border-radius: 5px;
 }
 
 .input-container button:hover {
 	cursor: pointer;
-	background-color: #0096FF;
+	background-color: #0d7ef7;
 }
 
 .sections {
@@ -70,8 +64,7 @@
 	color: #000000;
 	box-sizing: border-box;
 	padding: 20px;
-	border-radius: 15px;
-	
+	border-radius: 5px;
 }
 
 .section1 textarea {
@@ -79,12 +72,11 @@
 	height: 100%;
 	border: none;
 	outline: none;
-	font-size: 20px;
-	border-radius: 5px;
+	font-size: 16px;
+	border-radius: 0.5px;
 	/* color: #ffffff; */
 	background-color: #ffffff;
 	color: #000000;
-	
 }
 
 .section2 {
@@ -93,7 +85,7 @@
 	background-color: #333030;
 	color: #ffffff;
 	box-sizing: border-box;
-	padding: 20px;
+	padding: 2px;
 	border-radius: 15px;
 }
 
@@ -109,9 +101,9 @@
 }
 
 .section3 {
-	width: 43%;
+	width: 86%;
 	height: 100%;
-	background-color: #ffffff;
+	background-color: #333030;
 	box-sizing: border-box;
 	padding: 20px;
 	border-radius: 15px;
@@ -132,11 +124,11 @@
 .section4 {
 	width: 15%;
 	height: 100%;
-	background-color: #333030;
+	background-color: #ffffff;
 	box-sizing: border-box;
-	padding-left: 40px;
+	padding: 20px;
 	/* flex: end; */
-
+	border-radius: 5px;
 }
 
 /* .section4 button {
@@ -167,7 +159,6 @@
 	color: #fff;
 	height: 60px;
 	padding: 0 20px;
-
 }
 
 .logo {
@@ -223,62 +214,36 @@
 	border-radius: 5px;
 	color: #333030;
 	background-color: #ffffff;
-	padding:20px
 }
 
 .container1 {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	height: 50%;
+	height: 100vh;
 	width: 100vw;
 	background-color: #333030;
 	color: #000000;
 }
 
-.container_Dependency {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	height: 50%;
-	width: 100vw;
-	background-color: #333030;
-	color: #000000;
-	}
-	
-	.Image_Dependency {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	height: 150%;
-	min-width: 00px;
-	width: 100%;
-	background-color: #333030;
-	color: #000000;
-	padding: 20px;
-	border: 1px solid #ccc;
+.star {
+    font-size: 24px;
+  }
 
-	}
+.star-rating {
+    width: 30;
+    font-size: 2px;
+  }
 
-/* CSS code */
-.navbar {
-	display: flex;
-	background-color: #333;
-	color: #fff;
-	
+button {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
   }
-  
-  .navbar a {
-	color: #929191;
-	text-decoration: none;
-	padding: 10px;
-	
+  .on {
+    color: yellow;
   }
-  
-  .navbar a.selected {
-	background-color: #f5f5f5;
-	color: #ffffff;
-	font-weight: bold;
-	
+  .off {
+    color: #ccc;
   }
-	
