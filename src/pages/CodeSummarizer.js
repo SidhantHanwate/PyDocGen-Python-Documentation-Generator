@@ -66,7 +66,7 @@ export default function codeSummarizer(props) {
 						<button onClick={handleButtonClick}>Fetch</button>
 					</div>
 				</div>
-				<div className="d-flex p-1">
+				<div className="d-flex p-4">
 					<div className="section1cs">
 						<Sidebar buttonNames={filearray} setTextRightTop={setTextRightTop} />
 					</div>
@@ -90,7 +90,7 @@ export default function codeSummarizer(props) {
 						type="button"
 						className="btn"
 						onClick={handleSubmit}
-						style={{ backgroundColor: "#4d05b9", color: "white", width: "151px", fontSize: "20px", fontWeight: "bold" ,  position: "absolute", bottom: 0, alignContent: "center" }}
+						style={{ backgroundColor: "#0096FF", color: "white", width: "151px", fontSize: "20px", fontWeight: "bold", alignContent: "center", }}
 						>
 						Submit
 					</button>

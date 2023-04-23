@@ -2,6 +2,122 @@
 import json
 from django.http import JsonResponse
 
+import ast
+import networkx as nx
+import os
+import matplotlib.pyplot as plt
+
+import base64
+
+import subprocess
+
+
+  
+from PIL import Image
+
+def replace_with_white_image(file_path):
+    # Open the image file
+    img = Image.open(file_path)
+
+    # Create a new blank image with the same size and mode as the original image
+    white_img = Image.new(mode=img.mode, size=img.size, color=(255, 255, 255))
+
+    # Save the new image to the same file path, overwriting the original image
+    white_img.save(file_path)
+
+    # Close the image files
+    img.close()
+    white_img.close()
+
+
+# Define a function to parse a Python file and extract function information
+def parse_file(filepath,graph):
+    with open(filepath, "r") as file:
+        source = file.read()
+
+    # Parse the source code into an abstract syntax tree (AST)
+    tree = ast.parse(source)
+
+    # Traverse the AST and extract information about the functions
+    for node in ast.walk(tree):
+        if isinstance(node, ast.FunctionDef):
+            function_name = node.name
+            module_name = os.path.basename(filepath).split(".")[0]
+
+            # Add the function as a node to the graph
+            graph.add_node(f"{module_name}.{function_name}")
+
+            # Traverse the AST again and look for function calls
+            for subnode in ast.walk(node):
+                if isinstance(subnode, ast.Call):
+                    if isinstance(subnode.func, ast.Name):
+                        # Add the function call as a directed edge in the graph
+                        graph.add_edge(
+                            f"{module_name}.{function_name}",
+                            f"{module_name}.{subnode.func.id}"
+                        )
+
+# Parse all Python files in the "python_files" directory
+# for filename in os.listdir("/home/swamikedari/Documents/code visualizer"):
+#     if filename.endswith(".py"):
+#         filepath = os.path.join("/home/swamikedari/Documents/code visualizer", filename)
+#         parse_file(filepath)
+
+# Generate a graph visualization and save it as an image file
+
+
+def parse_folder(path, graph):
+    # Create a graph object
+    for filename in os.listdir(path):
+        if filename.endswith(".py"):
+            filepath=os.path.join(path,filename)
+            parse_file(filepath,graph)
+        elif os.path.isdir(os.path.join(path,filename)):
+            parse_folder(os.path.join(path,filename),graph)
+
+    return graph
+
+
+
+def generate_data_url(image_path):
+    with open(image_path, "rb") as image_file:
+        encoded_string = base64.b64encode(image_file.read()).decode('utf-8')
+    data_url = f"data:image/png;base64,{encoded_string}"
+    return data_url
+
+def getfunctiongraph(request):
+    body=json.loads(request.body)
+    input_text = body["input"]
+
+    print(f"Received input: {input_text}")  # Debugging print statement
+    if input_text is not None:
+        print("repo link: ", input_text)
+        filepath=clone_repo(input_text)
+        print(filepath)
+
+        graph = nx.DiGraph()
+        
+        graph=parse_folder(filepath, graph)
+        # set node positions using spring layout
+        # pos = nx.spring_layout(graph, seed=20)
+        nx.draw(graph, with_labels=True, font_size=7, node_size=1000, node_color='skyblue', arrowstyle='->', arrowsize=20)
+        imagepath="/home/swamikedari/Documents/pydoc/Documentation_Generator/src/function_visualization.png"
+        graph.clear()
+        # Check if the file already exists
+        # plt.figure(figsize=(1000, 1000))
+        if os.path.isfile(imagepath):
+            os.remove(imagepath)
+            print(f"{imagepath} already exists")
+            plt.savefig(imagepath)
+            plt.clf()
+        else:
+            plt.savefig(imagepath)
+            plt.clf()
+    
+        return JsonResponse({'output': imagepath})
+    else:
+        return JsonResponse({'error': 'No input provided'})
+
 def loadcontent(request):
     body=json.loads(request.body)
     repo_link=body["input"]
@@ -39,7 +155,7 @@ def fetchdata(request):
     else:
         return JsonResponse({'error': 'No input provided'})
 
-import os
+import os 
 import subprocess
 
 def clone_repo(github_repo_link):

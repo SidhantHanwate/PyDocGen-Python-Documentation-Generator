@@ -29,8 +29,10 @@ export default function RequirementsFileGenerator() {
 	}
 
 	return (
-		<div className="container1">
-			<div className="input-container">
+		<div className="">
+			<div className="row">
+				<div className="container-fluid">
+			<div className="input-container mt--5">
 				<input
 					type="text"
 					value={searchTerm}
@@ -39,13 +41,15 @@ export default function RequirementsFileGenerator() {
 				/>
 						<button onClick={handleButtonClick}>Fetch</button>
 			</div>
-			<div className="requirements">
+			<div className="requirements my-4">
 						<textarea
 							value={reqtext}
 							placeholder="Requirements"
 							onChange={handlereqtext}
 						/>
 					</div>
+		</div>
+		</div>
 		</div>
 	);
 }
