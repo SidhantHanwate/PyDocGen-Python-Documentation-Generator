@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import { useRef } from "react";
-import "../App.css";
+import "../components/CodingStyleGuide.css";
 import axios from "axios";
 import Sidebar from "../components/Sidebar";
+import StarRating from "../components/StarRating";
+
+
 export default function CodingStyleGuide() {
 	const [textRightTop, setTextRightTop] = useState("");
 	const [textRightBottom, setTextRightBottom] = useState("");
@@ -70,21 +73,18 @@ export default function CodingStyleGuide() {
 					<div className="section1cs">
 						<Sidebar buttonNames={filearray} setTextRightTop={setTextRightTop} />
 					</div>
-					<div className="section2">
+					{/* <div className="section2">
 						<textarea
 							value={textRightTop}
 							ref={ref}
 							placeholder="Enter the code here"
 							onChange={handleTextRightTopChange}
 						/>
-					</div>
+					</div> */}
 					<div className="section3">
-						<textarea
-							value={textRightBottom}
-							placeholder="Documented Code"
-							onChange={handleTextRightBottomChange}
-						/>
+						<StarRating />
 					</div>
+					
 					<div className="section4">
 					<button
 						type="button"
