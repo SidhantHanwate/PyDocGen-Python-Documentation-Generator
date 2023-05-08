@@ -14,21 +14,16 @@ To install Django and run Backend, follow the steps below:
 ``` bash
 cd django_bk
 ```
-2. Create a python virtual environment using
-    python
+
+2. Install the following packages
 ``` bash
-pip install django
+pip install django djangorestframework django-cors-headers openai networkx pipreqs pygithub pylint
 ```
-3. Start the Virtual environment
-4. Install the following packages
-``` bash
-pip install django djangorestframework django-cors-headers openai
-```
-5. Change the directory to django_test:
+3. Change the directory to django_test:
 ``` bash
 cd django_test
 ```
-6. Start the backend using the following commands:
+5. Start the backend using the following commands:
 ``` bash
 python manage.py runserver
 ```
