@@ -23,7 +23,7 @@ pip install django djangorestframework django-cors-headers openai networkx pipre
 ``` bash
 cd django_test
 ```
-5. Start the backend using the following commands:
+4. Start the backend using the following commands:
 ``` bash
 python manage.py runserver
 ```
