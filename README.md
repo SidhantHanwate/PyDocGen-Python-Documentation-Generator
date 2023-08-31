@@ -1,4 +1,4 @@
-# Documentation_Generator
+# PyDocGen: Documentation_Generator
 The project makes the complete documentation for the python code which includes different types of documentation including code-summarizer, auto-generation of the requirements.txt file and the code visualization. 
 
 ``` bash
